@@ -31,7 +31,7 @@
   },
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
-    "postinstall": "Select-String -AllMatches -Pattern '^.*url = (.*)$' .gitmodules | %{ git clone $_.Matches.groups[1].value }",
+    "postinstall": "@powershell -Command \"Select-String -AllMatches -Pattern '^.*url = (.*)$' .gitmodules | %{ git clone $_.Matches.groups[1].value }\"",
     "test": "mocha --compilers coffee:coffee-script --grep Module",
     "full-test": "mocha --compilers coffee:coffee-script",
     "valgrind": "coffee -c test/usb.coffee; valgrind --leak-check=full --show-possibly-lost=no node --expose-gc --trace-gc node_modules/mocha/bin/_mocha -R spec"
